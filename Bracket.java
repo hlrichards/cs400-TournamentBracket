@@ -13,15 +13,21 @@ public class Bracket {
      */
     public Bracket(ArrayList<Team> teams){
         int num = teams.size();
-        createBracket(num);
+        createBlankBracket(num);
+
+        
+        for(int i = 0; i < num/2; i++) {
+            getRound(0).get(i).setTeam1(teams.get(i));
+            getRound(0).get(i).setTeam2(teams.get(num-i-1));
+        }
     }
     
     /**
      * Creates the shell for the bracket with Games that contain Teams with
      * the name "TBD" and seeded 0.
-     * @param size
+     * @param size is the number of teams in the round
      */
-    public void createBracket(int size) {
+    public void createBlankBracket(int size) {
         ArrayList<Game> round = new ArrayList<>();
         if(size == 1) return;
         else {
@@ -31,15 +37,14 @@ public class Bracket {
             bracket.add(round);
             size = size / 2;
         }
-        createBracket(size);
+        createBlankBracket(size);
     }
     
     
     /**
-     * @return the given round
+     * @return ArrayList os Games for the given round
      */
     public ArrayList<Game> getRound(int round){
-        // added 1 for idexing
         return bracket.get(round);
     }
     
@@ -51,5 +56,9 @@ public class Bracket {
      */
     public boolean nextRound() {
         return true;
+    }
+    
+    public int getNumberOfRounds() {
+        return bracket.size();
     }
 }
