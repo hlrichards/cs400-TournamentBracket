@@ -31,6 +31,7 @@ public class Bracket {
             bracket.add(round);
             size = size / 2;
         }
+        createBracket(size);
     }
     
     
