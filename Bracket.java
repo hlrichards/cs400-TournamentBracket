@@ -29,7 +29,7 @@ public class Bracket {
      */
     public void createBlankBracket(int size) {
         ArrayList<Game> round = new ArrayList<>();
-        if(size == 1) return;
+        if(size == 1 || size == 0) return;
         else {
             for(int i = 0; i < size/2; i++) {
                 round.add(new Game(new Team("TBD", 0), new Team("TBD", 0)));
