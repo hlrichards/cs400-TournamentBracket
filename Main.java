@@ -7,8 +7,8 @@
 // Semester:         Spring 2018
 //
 // Authors:          Jonah Rueb, jrueb@wisc.edu; 
-//						Haley Richards, hlrichards@wisc.edu;
-//						Sam Ramakrishnan, sramakrishn8@wisc.edu 
+//			Haley Richards, hlrichards@wisc.edu;
+//			Sam Ramakrishnan, sramakrishn8@wisc.edu 
 // Lecturer's Name:  Debra Deppeler CS400
 //
 ///////////////////////////////////////////////////////////////////////////////
@@ -508,8 +508,13 @@ public class Main extends Application {
 			Scene scene = new Scene(root,400,400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setTitle("CS400 Tournament Bracket");
+			
+			// adds a scroll bar for functionality on smaller screens
+			ScrollPane scrollPane = new ScrollPane();
+	        scrollPane.setContent(gPane);
+			
 			root.setLeft(list);
-			root.setCenter(gPane);
+			root.setCenter(scrollPane);
 			root.setRight(topTeams);
 			
 			// Sets the size of the window to be maximized on users screen
