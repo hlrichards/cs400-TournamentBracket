@@ -1,3 +1,19 @@
+///////////////////////////////////////////////////////////////////////////////
+//                   
+// Title:            P5 - Tournament Bracket
+// Files:            Main.java, Bracket.java, Game.java, Team.java, 
+// 						TeamReader.java
+//
+// Semester:         Spring 2018
+//
+// Authors:          Jonah Rueb, jrueb@wisc.edu; 
+//						Haley Richards, hlrichards@wisc.edu;
+//						Sam Ramakrishnan, sramakrishn8@wisc.edu 
+// Lecturer's Name:  Debra Deppeler CS400
+//
+///////////////////////////////////////////////////////////////////////////////
+
+package application;
 
 public class Game {
     Team team1, team2, winner, loser;
@@ -51,6 +67,14 @@ public class Game {
     public int getScoreTeam2() {
         return scoreTeam2;
     }
+    
+    public void setTeam1(Team team) {
+		team1 = team;
+	}
+
+	public void setTeam2(Team team) {
+		team2 = team;
+	}
     
     
 }
