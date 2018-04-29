@@ -7,11 +7,12 @@
 // Semester:         Spring 2018
 //
 // Authors:          Jonah Rueb, jrueb@wisc.edu; 
-//		     Haley Richards, hlrichards@wisc.edu;
-//		     Sam Ramakrishnan, sramakrishn8@wisc.edu 
+//						Haley Richards, hlrichards@wisc.edu;
+//						Sam Ramakrishnan, sramakrishn8@wisc.edu 
 // Lecturer's Name:  Debra Deppeler CS400
 //
 ///////////////////////////////////////////////////////////////////////////////
+
 
 package application;
 
@@ -28,6 +29,8 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -43,10 +46,25 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-
+/**
+ * This class reads in the team names from the file, sets up the GUI, and handles the user interaction
+ * to create a functioning tournament bracket for 16, 8, 4, 2, 1, or 0 teams. This class handles the user
+ * input of scores and the user action of pressing the submit button. It displays the progression of each
+ * team through the tournament and eventually displays the top three teams of the tournament.
+ * @author Haley, Jonah, Sam
+ *
+ */
 public class Main extends Application {
-	static ArrayList<Team> teamsList;
 	
+	// This field stores the Team objects for each team read in from the file
+	static ArrayList<Team> teamsList; 
+	
+	/**
+	 * This method initializes the controls and the setup of the GUI. It handles and seeds the
+	 * teamsList in order to create a proper bracket display for each possible number of teams. 
+	 * It then handles the users input to the tournament games and eventually displays the 
+	 * winners of the tournament
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -493,8 +511,15 @@ public class Main extends Application {
 			root.setLeft(list);
 			root.setCenter(gPane);
 			root.setRight(topTeams);
-			primaryStage.setWidth(1450);
- 			primaryStage.setHeight(1000);
+			
+			// Sets the size of the window to be maximized on users screen
+			Screen screen = Screen.getPrimary();
+			Rectangle2D bounds = screen.getVisualBounds();
+			primaryStage.setX(bounds.getMinX());
+			primaryStage.setY(bounds.getMinY());
+			primaryStage.setWidth(bounds.getWidth());
+			primaryStage.setHeight(bounds.getHeight());
+			
 			primaryStage.setScene(scene);
 			primaryStage.show();
 
@@ -504,6 +529,12 @@ public class Main extends Application {
 		}
 	}
 	
+	/**
+	 * This method reads in the file containing the team names from the command line and then 
+	 * creates an instance of the TeamReader class to store the ArrayList of teams as a field
+	 * in the Main class. 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		TeamReader read = new TeamReader("src/16Teams.txt"); // (args[0]);
         teamsList = read.getTeams();
