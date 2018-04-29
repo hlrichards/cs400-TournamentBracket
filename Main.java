@@ -37,10 +37,17 @@ public class Main extends Application {
 		try {
 			
 		
+			// This section initializes each game to be played in each round, starting with the
+			// round of 16, then quarter finals, then semi finals, then finals. This code correctly
+			// seeds teams read in from the file (supports sizes 16, 8, 4, 2, 1, and 0) 
+			// Each game is a vertical box with 2 horizontal boxes (each with a Label and TextField)
+			// and a submit button. Each round of games is then put into its own vertical box 
 			
 			VBox game1 = new VBox();
 			Label team1 = new Label("Team 1");
 			Label team16 = new Label("Team 16");
+			// checks if there are enough teams to hold the round of 16, 
+			// if so, it seeds them
 			if(teamsList.size() == 16) {
 				team1.setText(teamsList.get(0).getName());
 				team16.setText(teamsList.get(15).getName());
@@ -212,9 +219,13 @@ public class Main extends Application {
 					new Label(" "),game5,new Label(" "),game6,new Label(" "),game7,new Label(" "),game8);	
 
 			
+			// This section begins the quarter final games
+			
 			VBox quarter1 = new VBox();
 			Label teamq1 = new Label("TBD");
 			Label teamq2 = new Label("TBD");
+			// checks to see if the quarter finals is the first round,
+			// if so, it seeds the teams
 			if(teamsList.size() == 8) {
 				teamq1.setText(teamsList.get(0).getName());
 				teamq2.setText(teamsList.get(7).getName());
@@ -230,6 +241,7 @@ public class Main extends Application {
 			hboxq2.getChildren().addAll(teamq2,scoreq2);
 			hboxq2.setAlignment(Pos.CENTER_RIGHT);
 			Button quarter1submit = new Button("Submit Score");
+			// disables the button if there are enough teams to hold a round of 16
 			if(teamsList.size() > 8)
 				quarter1submit.setDisable(true);
 			quarter1.getChildren().addAll(hboxq1,quarter1submit,hboxq2);
@@ -304,6 +316,7 @@ public class Main extends Application {
 			quarter4.getChildren().addAll(hboxq7,quarter4submit,hboxq8);
 			quarter4.setAlignment(Pos.CENTER_RIGHT);
 			
+			// adds all of the quarter final games to a VBox and adds blank labels for spacing on the GUI
 			VBox quarters = new VBox();
 			quarters.getChildren().addAll(new Label("  "),new Label("  "),new Label("  "), quarter1, new Label("  "), 
 					new Label("  "),new Label("  "),new Label("  "),new Label("  "),new Label("  "),quarter2, 
@@ -315,6 +328,8 @@ public class Main extends Application {
 			VBox semi1 = new VBox();
 			Label teamSemi1 = new Label("TBD");
 			Label teamSemi2 = new Label("TBD");
+			// Checks if there are only 4 teams (the bracket begins with
+			// semis) and seeds the four teams if that is true
 			if(teamsList.size() == 4) {
 				teamSemi1.setText(teamsList.get(0).getName());
 				teamSemi2.setText(teamsList.get(3).getName());
@@ -389,44 +404,69 @@ public class Main extends Application {
 			finals.getChildren().addAll(hboxFinal1,finalSubmit,hboxFinal2);
 			finals.setAlignment(Pos.CENTER_RIGHT);
 			
+			
+			// adds the team names to an ArrayList so that they may be 
+			// put into an ObservableList and displayed in order on the GUI
 			ArrayList<String> teamNames = new ArrayList<String>();
 			for(int x = 0; x < teamsList.size(); x++) {
 				teamNames.add(teamsList.get(x).getName());
 			}
 			
-			
-			
-			
-			
+			// puts the team names into an ObservableList
 			ListView<String> list = new ListView<String>();
 			ObservableList<String> items = FXCollections.observableArrayList(teamNames);
 			list.setItems(items);
 			
+			// adds the rounds to the GUI as necessary, depending on the number
+			// of teams in the tournament
 			GridPane gPane = new GridPane();
 			if(teamsList.size() == 16)
 				gPane.add(round1, 0, 0);
 			if(teamsList.size() >= 8)
 				gPane.add(quarters, 1, 0);
-			
 			if(teamsList.size() >= 4)
 				gPane.add(semis, 2, 0);
 			if(teamsList.size() >= 2)
 				gPane.add(finals, 3, 0);
 			
+			// handles the GUI if there's only one team in the tournament, since 
+			// no game can be played
+			// We decided just to display the name of the team rather than creating 
+			// a game display
 			if(teamsList.size() == 1) {
 				Label onlyTeam = new Label(teamsList.get(0).getName());
 				gPane.add(onlyTeam, 0, 1);
 			}
 			
 			
+			
+			// This section displays the top 3 teams from the tournament
 			Label top = new Label("Leaderboard");
 			top.setStyle("-fx-font: 40 arial;");
+			
 			Label firstPlace = new Label("First Place:");
 			firstPlace.setStyle("-fx-font: 20 arial;");
+			if(teamsList.size() == 0) // handles the case where there are 0 teams
+				firstPlace.setText("No winner");
+			else if(teamsList.size() == 1) // handles the case where there's only 1 team
+				firstPlace.setText(teamsList.get(0).getName());
+			
 			Label secondPlace = new Label("Second Place:");
 			secondPlace.setStyle("-fx-font: 20 arial;");
+			if(teamsList.size() == 0)
+				secondPlace.setText("No runner-up");
+			else if(teamsList.size() == 1)
+				secondPlace.setText("No runner-up");
+			
 			Label thirdPlace = new Label("Third Place:");
 			thirdPlace.setStyle("-fx-font: 20 arial;");
+			if(teamsList.size() == 0)
+				thirdPlace.setText("No third place");
+			else if(teamsList.size() == 1) 
+				thirdPlace.setText("No third place");
+			else if(teamsList.size() == 2) // handles the case where there are only 2 teams
+				thirdPlace.setText("No third place");
+			
 			VBox topTeams = new VBox();
 			topTeams.setAlignment(Pos.CENTER);
 			topTeams.getChildren().addAll(top,firstPlace,secondPlace,thirdPlace);
@@ -438,7 +478,7 @@ public class Main extends Application {
 			root.setLeft(list);
 			root.setCenter(gPane);
 			root.setRight(topTeams);
-			primaryStage.setWidth(1800);
+			primaryStage.setWidth(1450);
  			primaryStage.setHeight(1000);
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -450,10 +490,9 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
-
-		TeamReader read = new TeamReader("src/8Teams.txt"); // (args[0]);
-        	teamsList = read.getTeams();
-       	 	Bracket bracket = new Bracket(teamsList);
+		TeamReader read = new TeamReader("src/16Teams.txt"); // (args[0]);
+        teamsList = read.getTeams();
+        Bracket bracket = new Bracket(teamsList);
         
 		launch(args);
 	}
