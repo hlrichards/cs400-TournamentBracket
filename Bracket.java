@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Bracket {
     ArrayList<ArrayList<Game>> bracket = new ArrayList<>();
-
+    int round;
 
     
     /**
@@ -14,6 +14,7 @@ public class Bracket {
      * @param teams
      */
     public Bracket(ArrayList<Team> teams){
+        round = 1;
         int num = teams.size();
         createBlankBracket(num);
         
@@ -64,6 +65,27 @@ public class Bracket {
      * @return true if the next round was created false if it couldn't
      */
     public boolean nextRound() {
+        for(Game game : bracket.get(round-1)) {
+            if(game.getWinner() == null) return false;
+        }
+        
+        ArrayList<Game> pastRound = bracket.get(round-1);
+        ArrayList<Game> newRound = bracket.get(round);
+        
+        ArrayList<Team> winners = new ArrayList<>();
+        
+        for(Game game : pastRound) {
+            winners.add(game.getWinner());
+        }
+        
+        int j = 0;
+        for(int i = 0; i < newRound.size(); i++) {
+            newRound.get(0).setTeam1(winners.get(j));
+            j++;
+            newRound.get(0).setTeam2(winners.get(j));
+            j++;           
+        }
+        round++;
         return true;
     }
     
