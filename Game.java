@@ -1,17 +1,33 @@
 package application;
 
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class Game {
     Team team1, team2, winner, loser;
     int scoreTeam1, scoreTeam2;
+    GameUI gameUI;
        
     public Game(Team team1, Team team2) {
         this.team1 = team1;
         this.team2 = team2;
+        gameUI = new GameUI(team1.getName(),team2.getName());
         winner = null; loser = null;       
     }
     
-    /**
+    public GameUI getGameUI() {
+		return gameUI;
+	}
+
+	public void setGameUI(GameUI gameUI) {
+		this.gameUI = gameUI;
+	}
+
+	/**
      * Sets the winner and loser based on scores given.
      * If there is a tie, team1 advances.
      * 
@@ -90,6 +106,42 @@ public class Game {
             loser = team2;
         }
 	}
+	class GameUI{
+		VBox ui;
+		public VBox getUi() {
+			return ui;
+		}
+		public void setUi(VBox ui) {
+			this.ui = ui;
+		}
+		Label lbl_team1, lbl_team2;
+		TextField txt_score1, txt_score2;
+		HBox hbox1, hbox2;
+		Button btn_submit;
+		public GameUI(String team1, String team2) {
+			super();
+			ui = new VBox();
+			lbl_team1 = new Label(team1);
+			lbl_team2 = new Label(team2);
+
+			 hbox1 = new HBox();
+			 txt_score1 = new TextField();
+			txt_score1.setPromptText("score");
+			hbox1.getChildren().addAll(lbl_team1,txt_score1);
+			hbox1.setAlignment(Pos.CENTER_RIGHT);
+			 hbox2 = new HBox();
+		    txt_score2 = new TextField();
+			txt_score2.setPromptText("score");
+			hbox2.getChildren().addAll(lbl_team2,txt_score2);
+			hbox2.setAlignment(Pos.CENTER_RIGHT);
+			btn_submit = new Button("Submit Score");
+			ui.getChildren().addAll(hbox1,btn_submit,hbox2);
+			ui.setAlignment(Pos.CENTER_RIGHT);
+		}
+	 
+	}
     
+
     
 }
+
