@@ -1,19 +1,5 @@
-///////////////////////////////////////////////////////////////////////////////
-//                   
-// Title:            P5 - Tournament Bracket
-// Files:            Main.java, Bracket.java, Game.java, Team.java, 
-// 						TeamReader.java
-//
-// Semester:         Spring 2018
-//
-// Authors:          Jonah Rueb, jrueb@wisc.edu; 
-//						Haley Richards, hlrichards@wisc.edu;
-//						Sam Ramakrishnan, sramakrishn8@wisc.edu 
-// Lecturer's Name:  Debra Deppeler CS400
-//
-///////////////////////////////////////////////////////////////////////////////
-
 package application;
+
 
 public class Game {
     Team team1, team2, winner, loser;
@@ -48,7 +34,31 @@ public class Game {
         return team1;
     }
 
-    public Team getTeam2() {
+    public void setTeam1(Team team1) {
+		this.team1 = team1;
+	}
+
+	public void setTeam2(Team team2) {
+		this.team2 = team2;
+	}
+
+	public void setWinner(Team winner) {
+		this.winner = winner;
+	}
+
+	public void setLoser(Team loser) {
+		this.loser = loser;
+	}
+
+	public void setScoreTeam1(int scoreTeam1) {
+		this.scoreTeam1 = scoreTeam1;
+	}
+
+	public void setScoreTeam2(int scoreTeam2) {
+		this.scoreTeam2 = scoreTeam2;
+	}
+
+	public Team getTeam2() {
         return team2;
     }
 
@@ -67,13 +77,18 @@ public class Game {
     public int getScoreTeam2() {
         return scoreTeam2;
     }
-    
-    public void setTeam1(Team team) {
-		team1 = team;
-	}
 
-	public void setTeam2(Team team) {
-		team2 = team;
+	public void playGame(String score1, String score2) {
+		// TODO Auto-generated method stub
+        this.scoreTeam1 = Integer.parseInt(score1);
+        this.scoreTeam2 = Integer.parseInt(score2);
+        if(scoreTeam1 >= scoreTeam2) {          
+            winner = team1;
+            loser = team2;          
+        } else {
+            winner = team2;
+            loser = team2;
+        }
 	}
     
     

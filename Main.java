@@ -7,8 +7,8 @@
 // Semester:         Spring 2018
 //
 // Authors:          Jonah Rueb, jrueb@wisc.edu; 
-//			Haley Richards, hlrichards@wisc.edu;
-//			Sam Ramakrishnan, sramakrishn8@wisc.edu 
+//						Haley Richards, hlrichards@wisc.edu;
+//						Sam Ramakrishnan, sramakrishn8@wisc.edu 
 // Lecturer's Name:  Debra Deppeler CS400
 //
 ///////////////////////////////////////////////////////////////////////////////
@@ -18,13 +18,19 @@ package application;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -32,18 +38,23 @@ import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.util.converter.NumberStringConverter;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 /**
@@ -57,7 +68,9 @@ import javafx.scene.layout.VBox;
 public class Main extends Application {
 	
 	// This field stores the Team objects for each team read in from the file
-	static ArrayList<Team> teamsList; 
+	static ArrayList<Team> teamsList;
+	private static Bracket bracket; 
+	static final int LENGTH_OF_TEXT_FIELD = 5; 
 	
 	/**
 	 * This method initializes the controls and the setup of the GUI. It handles and seeds the
@@ -514,6 +527,7 @@ public class Main extends Application {
 	        scrollPane.setContent(gPane);
 			
 			root.setLeft(list);
+			root.setCenter(gPane);
 			root.setCenter(scrollPane);
 			root.setRight(topTeams);
 			
@@ -524,6 +538,310 @@ public class Main extends Application {
 			primaryStage.setY(bounds.getMinY());
 			primaryStage.setWidth(bounds.getWidth());
 			primaryStage.setHeight(bounds.getHeight());
+			
+	
+			// force the text fields to be numeric only
+			score1.textProperty().addListener(new ChangeListener<String>() {
+			    @Override
+			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+			        String newValue) {
+			        if (!newValue.matches("\\d*")) {
+			        	score1.setText(newValue.replaceAll("[^\\d]", ""));
+			        }
+			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
+			        	score1.setText(oldValue);
+			        }
+			    }
+			});
+			
+			score2.textProperty().addListener(new ChangeListener<String>() {
+			    @Override
+			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+			        String newValue) {
+			    	
+			        if (!newValue.matches("\\d*")) {
+			        	score2.setText(newValue.replaceAll("[^\\d]", ""));
+			        }
+			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
+			        	score2.setText(oldValue);
+			        }
+			    }
+			});
+			
+			score3.textProperty().addListener(new ChangeListener<String>() {
+			    @Override
+			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+			        String newValue) {
+			        if (!newValue.matches("\\d*")) {
+			        	score3.setText(newValue.replaceAll("[^\\d]", ""));
+			        }
+			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
+			        	score3.setText(oldValue);
+			        }
+			    }
+			});
+			
+			score4.textProperty().addListener(new ChangeListener<String>() {
+			    @Override
+			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+			        String newValue) {
+			        if (!newValue.matches("\\d*")) {
+			        	score4.setText(newValue.replaceAll("[^\\d]", ""));
+			        }
+			        else if(newValue.length()==5) {
+			        	score4.setText(oldValue);
+			        }
+			    }
+			});
+			
+			score5.textProperty().addListener(new ChangeListener<String>() {
+			    @Override
+			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+			        String newValue) {
+			        if (!newValue.matches("\\d*")) {
+			        	score5.setText(newValue.replaceAll("[^\\d]", ""));
+			        }
+			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
+			        	score5.setText(oldValue);
+			        }
+			    }
+			});
+			
+			score6.textProperty().addListener(new ChangeListener<String>() {
+			    @Override
+			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+			        String newValue) {
+			        if (!newValue.matches("\\d*")) {
+			        	score6.setText(newValue.replaceAll("[^\\d]", ""));
+			        }
+			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
+			        	score6.setText(oldValue);
+			        }
+			    }
+			});
+			
+			score7.textProperty().addListener(new ChangeListener<String>() {
+			    @Override
+			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+			        String newValue) {
+			        if (!newValue.matches("\\d*")) {
+			        	score7.setText(newValue.replaceAll("[^\\d]", ""));
+			        }
+			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
+			        	score7.setText(oldValue);
+			        }
+			    }
+			});
+			
+			score8.textProperty().addListener(new ChangeListener<String>() {
+			    @Override
+			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+			        String newValue) {
+			        if (!newValue.matches("\\d*")) {
+			        	score8.setText(newValue.replaceAll("[^\\d]", ""));
+			        }
+			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
+			        	score8.setText(oldValue);
+			        }
+			    }
+			});
+			
+			score9.textProperty().addListener(new ChangeListener<String>() {
+			    @Override
+			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+			        String newValue) {
+			        if (!newValue.matches("\\d*")) {
+			        	score9.setText(newValue.replaceAll("[^\\d]", ""));
+			        }
+			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
+			        	score9.setText(oldValue);
+			        }
+			    }
+			});
+			
+			score10.textProperty().addListener(new ChangeListener<String>() {
+			    @Override
+			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+			        String newValue) {
+			        if (!newValue.matches("\\d*")) {
+			        	score10.setText(newValue.replaceAll("[^\\d]", ""));
+			        }
+			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
+			        	score10.setText(oldValue);
+			        }
+			    }
+			});
+			
+			score11.textProperty().addListener(new ChangeListener<String>() {
+			    @Override
+			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+			        String newValue) {
+			        if (!newValue.matches("\\d*")) {
+			        	score11.setText(newValue.replaceAll("[^\\d]", ""));
+			        }
+			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
+			        	score11.setText(oldValue);
+			        }
+			    }
+			});
+			
+			score12.textProperty().addListener(new ChangeListener<String>() {
+			    @Override
+			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+			        String newValue) {
+			        if (!newValue.matches("\\d*")) {
+			        	score12.setText(newValue.replaceAll("[^\\d]", ""));
+			        }
+			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
+			        	score12.setText(oldValue);
+			        }
+			    }
+			});
+			
+			score13.textProperty().addListener(new ChangeListener<String>() {
+			    @Override
+			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+			        String newValue) {
+			        if (!newValue.matches("\\d*")) {
+			        	score13.setText(newValue.replaceAll("[^\\d]", ""));
+			        }
+			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
+			        	score13.setText(oldValue);
+			        }
+			    }
+			});
+			
+			score14.textProperty().addListener(new ChangeListener<String>() {
+			    @Override
+			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+			        String newValue) {
+			        if (!newValue.matches("\\d*")) {
+			        	score14.setText(newValue.replaceAll("[^\\d]", ""));
+			        }
+			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
+			        	score14.setText(oldValue);
+			        }
+			    }
+			});
+			
+			score15.textProperty().addListener(new ChangeListener<String>() {
+			    @Override
+			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+			        String newValue) {
+			        if (!newValue.matches("\\d*")) {
+			        	score15.setText(newValue.replaceAll("[^\\d]", ""));
+			        }
+			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
+			        	score15.setText(oldValue);
+			        }
+			    }
+			});
+			
+			score16.textProperty().addListener(new ChangeListener<String>() {
+			    @Override
+			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+			        String newValue) {
+			        if (!newValue.matches("\\d*")) {
+			        	score16.setText(newValue.replaceAll("[^\\d]", ""));
+			        }
+			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
+			        	score16.setText(oldValue);
+			        }
+			    }
+			});
+			
+
+			
+			
+			
+			// Set listeners for buttons
+			game1submit.setOnAction(event -> {
+				// TODO Auto-generated method stub
+				if((score1.getText().equals("")||score16.getText().equals(""))) 
+					return;
+					
+			bracket.getRound(0).get(0).playGame(score1.getText(), score16.getText());
+			teamq1.setText(bracket.getRound(0).get(0).getWinner().getName());
+			game1submit.setDisable(true);
+			
+			if(teamq2.getText()!="TBD")
+			quarter1submit.setDisable(false);
+				
+			
+				
+			});
+			
+			game2submit.setOnAction(event -> {
+				// TODO Auto-generated method stub
+			bracket.getRound(0).get(1).playGame(score8.getText(), score9.getText());
+			teamq2.setText(bracket.getRound(0).get(1).getWinner().getName());
+			game2submit.setDisable(true);
+			if(teamq1.getText()!="TBD")
+			quarter1submit.setDisable(false);
+				
+			});
+			
+			game3submit.setOnAction(event -> {
+				// TODO Auto-generated method stub
+			bracket.getRound(0).get(2).playGame(score4.getText(), score13.getText());
+			teamq3.setText(bracket.getRound(0).get(2).getWinner().getName());
+			game3submit.setDisable(true);
+			
+			if(teamq4.getText()!="TBD")
+			quarter2submit.setDisable(false);
+				
+			});
+			
+			game4submit.setOnAction(event -> {
+				// TODO Auto-generated method stub
+			bracket.getRound(0).get(3).playGame(score5.getText(), score12.getText());
+			teamq4.setText(bracket.getRound(0).get(3).getWinner().getName());
+			game4submit.setDisable(true);
+			if(teamq3.getText()!="TBD")
+			quarter2submit.setDisable(false);
+				
+			});
+			
+			game5submit.setOnAction(event -> {
+				// TODO Auto-generated method stub
+			bracket.getRound(0).get(4).playGame(score2.getText(), score15.getText());
+			teamq5.setText(bracket.getRound(0).get(4).getWinner().getName());
+			game5submit.setDisable(true);
+			
+			if(teamq6.getText()!="TBD")
+			quarter3submit.setDisable(false);
+				
+			});
+			
+			game6submit.setOnAction(event -> {
+				// TODO Auto-generated method stub
+			bracket.getRound(0).get(5).playGame(score7.getText(), score10.getText());
+			teamq6.setText(bracket.getRound(0).get(5).getWinner().getName());
+			game6submit.setDisable(true);
+			if(teamq5.getText()!="TBD")
+			quarter3submit.setDisable(false);
+				
+			});
+			
+			game7submit.setOnAction(event -> {
+				// TODO Auto-generated method stub
+			bracket.getRound(0).get(6).playGame(score3.getText(), score14.getText());
+			teamq7.setText(bracket.getRound(0).get(6).getWinner().getName());
+			game7submit.setDisable(true);
+			if(teamq8.getText()!="TBD")
+			quarter4submit.setDisable(false);
+				
+			});
+			
+			game8submit.setOnAction(event -> {
+				// TODO Auto-generated method stub
+			bracket.getRound(0).get(7).playGame(score6.getText(), score11.getText());
+			teamq8.setText(bracket.getRound(0).get(7).getWinner().getName());
+			game8submit.setDisable(true);
+			if(teamq7.getText()!="TBD")
+			quarter4submit.setDisable(false);
+				
+			});
 			
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -543,9 +861,11 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		TeamReader read = new TeamReader("src/16Teams.txt"); // (args[0]);
         teamsList = read.getTeams();
-        Bracket bracket = new Bracket(teamsList);
+         bracket = new Bracket(teamsList);
         
 		launch(args);
 	}
 	
+
+
 }

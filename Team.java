@@ -1,19 +1,5 @@
-///////////////////////////////////////////////////////////////////////////////
-//                   
-// Title:            P5 - Tournament Bracket
-// Files:            Main.java, Bracket.java, Game.java, Team.java, 
-// 						TeamReader.java
-//
-// Semester:         Spring 2018
-//
-// Authors:          Jonah Rueb, jrueb@wisc.edu; 
-//						Haley Richards, hlrichards@wisc.edu;
-//						Sam Ramakrishnan, sramakrishn8@wisc.edu 
-// Lecturer's Name:  Debra Deppeler CS400
-//
-///////////////////////////////////////////////////////////////////////////////
+package application;
 
-package application; 
 
 public class Team {
     String name;
