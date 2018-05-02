@@ -25,6 +25,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+import application.Game.GameUI;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -97,6 +98,7 @@ public class MainNew extends Application {
 				rounds[i] = new VBox();
 				for(int j=0; j<bracket.getRound(i).size();j++) {
 					rounds[i].getChildren().addAll(bracket.getRound(i).get(j).getGameUI().getUi(), new Label(" "));
+					
 				}
 			}
 
@@ -525,6 +527,78 @@ public class MainNew extends Application {
 //			
 //				
 //			});
+			
+			for(int i =0; i<rounds.length-1;i++) {
+				rounds[i] = new VBox();
+				for(int j=0; j<bracket.getRound(i).size();j++) {
+					
+					 TextField t1 = bracket.getRound(i).get(j).getGameUI().getTxt_score1();
+					 TextField t2 = bracket.getRound(i).get(j).getGameUI().getTxt_score2();
+					 Button b1 = bracket.getRound(i).get(j).getGameUI().getBtn_submit();
+					 int currentRound = i;
+					 int currentGame = j;
+					 int nextRoundGame = j/2;
+					 Label lbl_NextRoundT1 = bracket.getRound(i+1).get(nextRoundGame).getGameUI().getLbl_team1();
+					 Label lbl_NextRoundT2 = bracket.getRound(i+1).get(nextRoundGame).getGameUI().getLbl_team2();
+					 Button btn_NextRound = bracket.getRound(i+1).get(nextRoundGame).getGameUI().getBtn_submit();
+					 t1.textProperty().addListener(new ChangeListener<String>() {
+						    @Override
+						    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+						        String newValue) {
+						        if (!newValue.matches("\\d*")) {
+						        	t1.setText(newValue.replaceAll("[^\\d]", ""));
+						        }
+						        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
+						        	t1.setText(oldValue);
+						        }
+						    }
+						});
+					 
+					 t2.textProperty().addListener(new ChangeListener<String>() {
+						    @Override
+						    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+						        String newValue) {
+						        if (!newValue.matches("\\d*")) {
+						        	t2.setText(newValue.replaceAll("[^\\d]", ""));
+						        }
+						        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
+						        	t2.setText(oldValue);
+						        }
+						    }
+						});
+					 
+					 b1.setOnAction(event -> {
+							// TODO Auto-generated method stub
+							if((t1.getText().equals("")||t2.getText().equals(""))) 
+								return;
+								
+						bracket.getRound(currentRound).get(currentGame).playGame(t1.getText(), t2.getText());
+						if(currentGame%2==0) {
+							lbl_NextRoundT1.setText(bracket.getRound(currentRound).get(currentGame).getWinner().getName());
+							if(lbl_NextRoundT2.getText()!="TBD")
+								btn_NextRound.setDisable(false);
+						}
+						
+						else {
+							lbl_NextRoundT2.setText(bracket.getRound(currentRound).get(currentGame).getWinner().getName());	
+							if(lbl_NextRoundT1.getText()!="TBD")
+								btn_NextRound.setDisable(false);
+						}
+						
+						
+						
+						b1.setDisable(true);
+						
+						//bracket.nextRound();
+						
+
+							
+						
+							
+						});
+				}
+			}
+
 			
 			primaryStage.setScene(scene);
 			primaryStage.show();
