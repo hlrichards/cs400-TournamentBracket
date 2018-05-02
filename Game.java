@@ -52,10 +52,12 @@ public class Game {
 
     public void setTeam1(Team team1) {
 		this.team1 = team1;
+		this.gameUI.lbl_team1.setText(team1.getName());
 	}
 
 	public void setTeam2(Team team2) {
 		this.team2 = team2;
+		this.gameUI.lbl_team2.setText(team2.getName());
 	}
 
 	public void setWinner(Team winner) {
@@ -115,8 +117,38 @@ public class Game {
 			this.ui = ui;
 		}
 		Label lbl_team1, lbl_team2;
+		public Label getLbl_team1() {
+			return lbl_team1;
+		}
+		public void setLbl_team1(Label lbl_team1) {
+			this.lbl_team1 = lbl_team1;
+		}
+		public Label getLbl_team2() {
+			return lbl_team2;
+		}
+		public void setLbl_team2(Label lbl_team2) {
+			this.lbl_team2 = lbl_team2;
+		}
 		TextField txt_score1, txt_score2;
 		HBox hbox1, hbox2;
+		public TextField getTxt_score1() {
+			return txt_score1;
+		}
+		public void setTxt_score1(TextField txt_score1) {
+			this.txt_score1 = txt_score1;
+		}
+		public TextField getTxt_score2() {
+			return txt_score2;
+		}
+		public void setTxt_score2(TextField txt_score2) {
+			this.txt_score2 = txt_score2;
+		}
+		public Button getBtn_submit() {
+			return btn_submit;
+		}
+		public void setBtn_submit(Button btn_submit) {
+			this.btn_submit = btn_submit;
+		}
 		Button btn_submit;
 		public GameUI(String team1, String team2) {
 			super();
