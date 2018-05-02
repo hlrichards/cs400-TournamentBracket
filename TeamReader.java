@@ -1,11 +1,33 @@
+///////////////////////////////////////////////////////////////////////////////
+//                   
+// Title:            P5 - Tournament Bracket
+// Files:            Main.java, Bracket.java, Game.java, Team.java, 
+//                      TeamReader.java
+//
+// Semester:         Spring 2018
+//
+// Authors:          Jonah Rueb, jrueb@wisc.edu; 
+//                      Haley Richards, hlrichards@wisc.edu;
+//                      Sam Ramakrishnan, sramakrishn8@wisc.edu 
+// Lecturer's Name:  Debra Deppeler CS400
+//
+///////////////////////////////////////////////////////////////////////////////
+
 package application;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * TeamReader is a class that reads information from a file and creates an ArrayList
+ * of team objects from it. TeamReader expects a file with a team of each line and
+ * the line number corresponds with the seed of the team.
+ * 
+ * @author jonahrueb
+ *
+ */
 public class TeamReader {
     ArrayList<String> teamsString = new ArrayList<>();
     ArrayList<Team> teams = new ArrayList<>();
@@ -26,7 +48,7 @@ public class TeamReader {
             }
         } catch (IOException e) {
             System.out.println("File not Found");
-        }        
+        }
     }
     
     /**
