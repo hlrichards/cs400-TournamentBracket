@@ -71,7 +71,10 @@ public class MainNew extends Application {
 	// This field stores the Team objects for each team read in from the file
 	static ArrayList<Team> teamsList;
 	private static Bracket bracket; 
-	static final int LENGTH_OF_TEXT_FIELD = 5; 
+	static final int LENGTH_OF_TEXT_FIELD = 5;
+	private Label lbl_firstPlace;
+	private Label lbl_secondPlace;
+	private Label lbl_thirdPlace; 
 	
 	/**
 	 * This method initializes the controls and the setup of the GUI. It handles and seeds the
@@ -119,14 +122,7 @@ public class MainNew extends Application {
 			// adds the rounds to the GUI as necessary, depending on the number
 			// of teams in the tournament
 			GridPane gPane = new GridPane();
-//			if(teamsList.size() == 16)
-//				gPane.add(round1, 0, 0);
-//			if(teamsList.size() >= 8)
-//				gPane.add(quarters, 1, 0);
-//			if(teamsList.size() >= 4)
-//				gPane.add(semis, 2, 0);
-//			if(teamsList.size() >= 2)
-//				gPane.add(finals, 3, 0);
+
 			
 			for(int i =0; i<rounds.length;i++) {
 					gPane.add(rounds[i], i, 0);
@@ -148,32 +144,32 @@ public class MainNew extends Application {
 			Label top = new Label("Leaderboard");
 			top.setStyle("-fx-font: 40 arial;");
 			
-			Label firstPlace = new Label("First Place:");
-			firstPlace.setStyle("-fx-font: 20 arial;");
+		    lbl_firstPlace = new Label("First Place:");
+			lbl_firstPlace.setStyle("-fx-font: 20 arial;");
 			if(teamsList.size() == 0) // handles the case where there are 0 teams
-				firstPlace.setText("No winner");
+				lbl_firstPlace.setText("No winner");
 			else if(teamsList.size() == 1) // handles the case where there's only 1 team
-				firstPlace.setText(teamsList.get(0).getName());
+				lbl_firstPlace.setText(teamsList.get(0).getName());
 			
-			Label secondPlace = new Label("Second Place:");
-			secondPlace.setStyle("-fx-font: 20 arial;");
+		    lbl_secondPlace = new Label("Second Place:");
+			lbl_secondPlace.setStyle("-fx-font: 20 arial;");
 			if(teamsList.size() == 0)
-				secondPlace.setText("No runner-up");
+				lbl_secondPlace.setText("No runner-up");
 			else if(teamsList.size() == 1)
-				secondPlace.setText("No runner-up");
+				lbl_secondPlace.setText("No runner-up");
 			
-			Label thirdPlace = new Label("Third Place:");
-			thirdPlace.setStyle("-fx-font: 20 arial;");
+			lbl_thirdPlace = new Label("Third Place:");
+			lbl_thirdPlace.setStyle("-fx-font: 20 arial;");
 			if(teamsList.size() == 0)
-				thirdPlace.setText("No third place");
+				lbl_thirdPlace.setText("No third place");
 			else if(teamsList.size() == 1) 
-				thirdPlace.setText("No third place");
+				lbl_thirdPlace.setText("No third place");
 			else if(teamsList.size() == 2) // handles the case where there are only 2 teams
-				thirdPlace.setText("No third place");
+				lbl_thirdPlace.setText("No third place");
 			
 			VBox topTeams = new VBox();
 			topTeams.setAlignment(Pos.CENTER);
-			topTeams.getChildren().addAll(top,firstPlace,secondPlace,thirdPlace);
+			topTeams.getChildren().addAll(top,lbl_firstPlace,lbl_secondPlace,lbl_thirdPlace);
 			
 		    BorderPane root = new BorderPane();
 			Scene scene = new Scene(root,400,400);
@@ -198,337 +194,9 @@ public class MainNew extends Application {
 			primaryStage.setHeight(bounds.getHeight());
 			
 	
-//			// force the text fields to be numeric only
-//			score1.textProperty().addListener(new ChangeListener<String>() {
-//			    @Override
-//			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-//			        String newValue) {
-//			        if (!newValue.matches("\\d*")) {
-//			        	score1.setText(newValue.replaceAll("[^\\d]", ""));
-//			        }
-//			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
-//			        	score1.setText(oldValue);
-//			        }
-//			    }
-//			});
-//			
-//			score2.textProperty().addListener(new ChangeListener<String>() {
-//			    @Override
-//			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-//			        String newValue) {
-//			    	
-//			        if (!newValue.matches("\\d*")) {
-//			        	score2.setText(newValue.replaceAll("[^\\d]", ""));
-//			        }
-//			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
-//			        	score2.setText(oldValue);
-//			        }
-//			    }
-//			});
-//			
-//			score3.textProperty().addListener(new ChangeListener<String>() {
-//			    @Override
-//			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-//			        String newValue) {
-//			        if (!newValue.matches("\\d*")) {
-//			        	score3.setText(newValue.replaceAll("[^\\d]", ""));
-//			        }
-//			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
-//			        	score3.setText(oldValue);
-//			        }
-//			    }
-//			});
-//			
-//			score4.textProperty().addListener(new ChangeListener<String>() {
-//			    @Override
-//			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-//			        String newValue) {
-//			        if (!newValue.matches("\\d*")) {
-//			        	score4.setText(newValue.replaceAll("[^\\d]", ""));
-//			        }
-//			        else if(newValue.length()==5) {
-//			        	score4.setText(oldValue);
-//			        }
-//			    }
-//			});
-//			
-//			score5.textProperty().addListener(new ChangeListener<String>() {
-//			    @Override
-//			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-//			        String newValue) {
-//			        if (!newValue.matches("\\d*")) {
-//			        	score5.setText(newValue.replaceAll("[^\\d]", ""));
-//			        }
-//			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
-//			        	score5.setText(oldValue);
-//			        }
-//			    }
-//			});
-//			
-//			score6.textProperty().addListener(new ChangeListener<String>() {
-//			    @Override
-//			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-//			        String newValue) {
-//			        if (!newValue.matches("\\d*")) {
-//			        	score6.setText(newValue.replaceAll("[^\\d]", ""));
-//			        }
-//			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
-//			        	score6.setText(oldValue);
-//			        }
-//			    }
-//			});
-//			
-//			score7.textProperty().addListener(new ChangeListener<String>() {
-//			    @Override
-//			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-//			        String newValue) {
-//			        if (!newValue.matches("\\d*")) {
-//			        	score7.setText(newValue.replaceAll("[^\\d]", ""));
-//			        }
-//			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
-//			        	score7.setText(oldValue);
-//			        }
-//			    }
-//			});
-//			
-//			score8.textProperty().addListener(new ChangeListener<String>() {
-//			    @Override
-//			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-//			        String newValue) {
-//			        if (!newValue.matches("\\d*")) {
-//			        	score8.setText(newValue.replaceAll("[^\\d]", ""));
-//			        }
-//			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
-//			        	score8.setText(oldValue);
-//			        }
-//			    }
-//			});
-//			
-//			score9.textProperty().addListener(new ChangeListener<String>() {
-//			    @Override
-//			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-//			        String newValue) {
-//			        if (!newValue.matches("\\d*")) {
-//			        	score9.setText(newValue.replaceAll("[^\\d]", ""));
-//			        }
-//			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
-//			        	score9.setText(oldValue);
-//			        }
-//			    }
-//			});
-//			
-//			score10.textProperty().addListener(new ChangeListener<String>() {
-//			    @Override
-//			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-//			        String newValue) {
-//			        if (!newValue.matches("\\d*")) {
-//			        	score10.setText(newValue.replaceAll("[^\\d]", ""));
-//			        }
-//			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
-//			        	score10.setText(oldValue);
-//			        }
-//			    }
-//			});
-//			
-//			score11.textProperty().addListener(new ChangeListener<String>() {
-//			    @Override
-//			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-//			        String newValue) {
-//			        if (!newValue.matches("\\d*")) {
-//			        	score11.setText(newValue.replaceAll("[^\\d]", ""));
-//			        }
-//			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
-//			        	score11.setText(oldValue);
-//			        }
-//			    }
-//			});
-//			
-//			score12.textProperty().addListener(new ChangeListener<String>() {
-//			    @Override
-//			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-//			        String newValue) {
-//			        if (!newValue.matches("\\d*")) {
-//			        	score12.setText(newValue.replaceAll("[^\\d]", ""));
-//			        }
-//			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
-//			        	score12.setText(oldValue);
-//			        }
-//			    }
-//			});
-//			
-//			score13.textProperty().addListener(new ChangeListener<String>() {
-//			    @Override
-//			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-//			        String newValue) {
-//			        if (!newValue.matches("\\d*")) {
-//			        	score13.setText(newValue.replaceAll("[^\\d]", ""));
-//			        }
-//			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
-//			        	score13.setText(oldValue);
-//			        }
-//			    }
-//			});
-//			
-//			score14.textProperty().addListener(new ChangeListener<String>() {
-//			    @Override
-//			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-//			        String newValue) {
-//			        if (!newValue.matches("\\d*")) {
-//			        	score14.setText(newValue.replaceAll("[^\\d]", ""));
-//			        }
-//			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
-//			        	score14.setText(oldValue);
-//			        }
-//			    }
-//			});
-//			
-//			score15.textProperty().addListener(new ChangeListener<String>() {
-//			    @Override
-//			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-//			        String newValue) {
-//			        if (!newValue.matches("\\d*")) {
-//			        	score15.setText(newValue.replaceAll("[^\\d]", ""));
-//			        }
-//			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
-//			        	score15.setText(oldValue);
-//			        }
-//			    }
-//			});
-//			
-//			score16.textProperty().addListener(new ChangeListener<String>() {
-//			    @Override
-//			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-//			        String newValue) {
-//			        if (!newValue.matches("\\d*")) {
-//			        	score16.setText(newValue.replaceAll("[^\\d]", ""));
-//			        }
-//			        else if(newValue.length()==LENGTH_OF_TEXT_FIELD) {
-//			        	score16.setText(oldValue);
-//			        }
-//			    }
-//			});
-//			
-//
-//			
-//			
-//			
-//			// Set listeners for buttons
-//			game1submit.setOnAction(event -> {
-//				// TODO Auto-generated method stub
-//				if((score1.getText().equals("")||score16.getText().equals(""))) 
-//					return;
-//					
-//			bracket.getRound(0).get(0).playGame(score1.getText(), score16.getText());
-//			teamq1.setText(bracket.getRound(0).get(0).getWinner().getName());
-//			game1submit.setDisable(true);
-//			
-//			bracket.nextRound();
-//			
-//			if(teamq2.getText()!="TBD")
-//			quarter1submit.setDisable(false);
-//				
-//			
-//				
-//			});
-//			
-//			game2submit.setOnAction(event -> {
-//				// TODO Auto-generated method stub
-//			bracket.getRound(0).get(1).playGame(score8.getText(), score9.getText());
-//			teamq2.setText(bracket.getRound(0).get(1).getWinner().getName());
-//			game2submit.setDisable(true);
-//			if(teamq1.getText()!="TBD")
-//			quarter1submit.setDisable(false);
-//			
-//			bracket.nextRound();
-//			});
-//			
-//			game3submit.setOnAction(event -> {
-//				// TODO Auto-generated method stub
-//			bracket.getRound(0).get(2).playGame(score4.getText(), score13.getText());
-//			teamq3.setText(bracket.getRound(0).get(2).getWinner().getName());
-//			game3submit.setDisable(true);
-//			
-//			if(teamq4.getText()!="TBD")
-//			quarter2submit.setDisable(false);
-//			
-//			bracket.nextRound();
-//			});
-//			
-//			game4submit.setOnAction(event -> {
-//				// TODO Auto-generated method stub
-//			bracket.getRound(0).get(3).playGame(score5.getText(), score12.getText());
-//			teamq4.setText(bracket.getRound(0).get(3).getWinner().getName());
-//			game4submit.setDisable(true);
-//			if(teamq3.getText()!="TBD")
-//			quarter2submit.setDisable(false);
-//			bracket.nextRound();	
-//			});
-//			
-//			game5submit.setOnAction(event -> {
-//				// TODO Auto-generated method stub
-//			bracket.getRound(0).get(4).playGame(score2.getText(), score15.getText());
-//			teamq5.setText(bracket.getRound(0).get(4).getWinner().getName());
-//			game5submit.setDisable(true);
-//			
-//			if(teamq6.getText()!="TBD")
-//			quarter3submit.setDisable(false);
-//			bracket.nextRound();
-//				
-//			});
-//			
-//			game6submit.setOnAction(event -> {
-//				// TODO Auto-generated method stub
-//			bracket.getRound(0).get(5).playGame(score7.getText(), score10.getText());
-//			teamq6.setText(bracket.getRound(0).get(5).getWinner().getName());
-//			game6submit.setDisable(true);
-//			if(teamq5.getText()!="TBD")
-//			quarter3submit.setDisable(false);
-//			
-//			bracket.nextRound();
-//				
-//			});
-//			
-//			game7submit.setOnAction(event -> {
-//				// TODO Auto-generated method stub
-//			bracket.getRound(0).get(6).playGame(score3.getText(), score14.getText());
-//			teamq7.setText(bracket.getRound(0).get(6).getWinner().getName());
-//			game7submit.setDisable(true);
-//			if(teamq8.getText()!="TBD")
-//			quarter4submit.setDisable(false);
-//			bracket.nextRound();
-//				
-//			});
-//			
-//			game8submit.setOnAction(event -> {
-//				// TODO Auto-generated method stub
-//			bracket.getRound(0).get(7).playGame(score6.getText(), score11.getText());
-//			teamq8.setText(bracket.getRound(0).get(7).getWinner().getName());
-//			game8submit.setDisable(true);
-//			if(teamq7.getText()!="TBD")
-//			quarter4submit.setDisable(false);
-//			bracket.nextRound();
-//				
-//			});
-//			
-//			quarter1submit.setOnAction(event -> {
-//				// TODO Auto-generated method stub
-//				if((scoreq1.getText().equals("")||scoreq2.getText().equals(""))) 
-//					return;
-//					
-//			bracket.getRound(0).get(1).playGame(scoreq1.getText(), score16.getText());
-//			teamq1.setText(bracket.getRound(1).get(0).getWinner().getName());
-//			game1submit.setDisable(true);
-//			
-//			bracket.nextRound();
-//			
-//			if(teamq2.getText()!="TBD")
-//			quarter1submit.setDisable(false);
-//				
-//			
-//				
-//			});
 			
-			for(int i =0; i<rounds.length-1;i++) {
+			// Listeners for all games
+			for(int i =0; i<rounds.length;i++) {
 				rounds[i] = new VBox();
 				for(int j=0; j<bracket.getRound(i).size();j++) {
 					
@@ -538,9 +206,13 @@ public class MainNew extends Application {
 					 int currentRound = i;
 					 int currentGame = j;
 					 int nextRoundGame = j/2;
-					 Label lbl_NextRoundT1 = bracket.getRound(i+1).get(nextRoundGame).getGameUI().getLbl_team1();
-					 Label lbl_NextRoundT2 = bracket.getRound(i+1).get(nextRoundGame).getGameUI().getLbl_team2();
-					 Button btn_NextRound = bracket.getRound(i+1).get(nextRoundGame).getGameUI().getBtn_submit();
+					 
+					 //Disable all buttons except for in the first round
+					 if(i!=0) {
+						 b1.setDisable(true);
+					 }
+					 
+					 //Only allow valid input in text box
 					 t1.textProperty().addListener(new ChangeListener<String>() {
 						    @Override
 						    public void changed(ObservableValue<? extends String> observable, String oldValue, 
@@ -567,21 +239,44 @@ public class MainNew extends Application {
 						    }
 						});
 					 
+					 //In the case the last round (Finals)
+					 if(i == rounds.length-1) {
+						 b1.setOnAction(event -> {
+								// TODO Auto-generated method stub
+								if((t1.getText().equals("")||t2.getText().equals(""))) 
+									return;
+									
+								lbl_firstPlace.setText("First Place:" +bracket.getRound(currentRound).get(currentGame).playGame(t1.getText(), t2.getText()).getName());
+								lbl_secondPlace.setText("First Place:" +bracket.getRound(currentRound).get(currentGame).getLoser().getName());
+								
+							
+							b1.setDisable(true);
+								
+							});
+						 break;
+					}
+					 
+					 
+					 
+
+					 Button btn_NextRound = bracket.getRound(i+1).get(nextRoundGame).getGameUI().getBtn_submit();
 					 b1.setOnAction(event -> {
 							// TODO Auto-generated method stub
 							if((t1.getText().equals("")||t2.getText().equals(""))) 
 								return;
 								
-						bracket.getRound(currentRound).get(currentGame).playGame(t1.getText(), t2.getText());
+						Team winner = bracket.getRound(currentRound).get(currentGame).playGame(t1.getText(), t2.getText());
 						if(currentGame%2==0) {
-							lbl_NextRoundT1.setText(bracket.getRound(currentRound).get(currentGame).getWinner().getName());
-							if(lbl_NextRoundT2.getText()!="TBD")
+							bracket.getRound(currentRound+1).get(nextRoundGame).setTeam1(winner);
+							System.out.println(currentRound+" "+currentGame + bracket.getRound(currentRound).get(currentGame).getWinner().getName());
+							if(bracket.getRound(currentRound+1).get(nextRoundGame).getTeam2().getName()!="TBD")
 								btn_NextRound.setDisable(false);
 						}
 						
 						else {
-							lbl_NextRoundT2.setText(bracket.getRound(currentRound).get(currentGame).getWinner().getName());	
-							if(lbl_NextRoundT1.getText()!="TBD")
+							bracket.getRound(currentRound+1).get(nextRoundGame).setTeam2(winner);
+							System.out.println(currentRound+" "+currentGame + bracket.getRound(currentRound).get(currentGame).getWinner().getName());
+							if(bracket.getRound(currentRound+1).get(nextRoundGame).getTeam1().getName()!="TBD")
 								btn_NextRound.setDisable(false);
 						}
 						

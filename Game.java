@@ -96,7 +96,7 @@ public class Game {
         return scoreTeam2;
     }
 
-	public void playGame(String score1, String score2) {
+	public Team playGame(String score1, String score2) {
 		// TODO Auto-generated method stub
         this.scoreTeam1 = Integer.parseInt(score1);
         this.scoreTeam2 = Integer.parseInt(score2);
@@ -107,6 +107,7 @@ public class Game {
             winner = team2;
             loser = team2;
         }
+        return winner;
 	}
 	class GameUI{
 		VBox ui;
