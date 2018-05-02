@@ -66,7 +66,7 @@ import javafx.scene.layout.VBox;
  * @author Haley, Jonah, Sam
  *
  */
-public class MainNew extends Application {
+public class Main extends Application {
 	
 	// This field stores the Team objects for each team read in from the file
 	static ArrayList<Team> teamsList;
@@ -90,18 +90,54 @@ public class MainNew extends Application {
 			// This section initializes each game to be played in each round, starting with the
 			// round of 16, then quarter finals, then semi finals, then finals. This code correctly
 			// seeds teams read in from the file (supports sizes 16, 8, 4, 2, 1, and 0) 
-			// Each game is a vertical box with 2 horizontal boxes (each with a Label and TextField)
-			// and a submit button. Each round of games is then put into its own vertical box 
 			
 
 			
-			
+		
 			VBox rounds[] = new VBox[bracket.getNumberOfRounds()];
 			for(int i =0; i<rounds.length;i++) {
 				rounds[i] = new VBox();
 				for(int j=0; j<bracket.getRound(i).size();j++) {
-					rounds[i].getChildren().addAll(bracket.getRound(i).get(j).getGameUI().getUi(), new Label(" "));
-					
+					// adding the extra labels in this section allows the display to look aesthetically pleasing
+					// and like a typical tournament bracket for any number of teams
+					if(i == 1) {
+						if(j == 0) 
+							rounds[i].getChildren().addAll(new Label("    "),new Label("    "),new Label("    "), 
+									bracket.getRound(i).get(j).getGameUI().getUi(), new Label(" "));
+						else if(j == 1 || j == 2)
+							rounds[i].getChildren().addAll(new Label("    "),new Label("    "),new Label("    "),
+									new Label("    "),new Label("    "), bracket.getRound(i).get(j).getGameUI().getUi(),
+									new Label(" "));
+						else 
+							rounds[i].getChildren().addAll(new Label("    "),new Label("    "),new Label("    "),
+									new Label("    "),new Label("    "),new Label("    "), 
+									bracket.getRound(i).get(j).getGameUI().getUi(), new Label(" "));
+					}
+						
+					else if(i == 2) {
+						if(j == 0) {
+							rounds[i].getChildren().addAll(new Label("    "),new Label("    "),new Label("    "),
+									new Label("    "),new Label("    "), new Label("    "),new Label("    "),
+									new Label("    "), bracket.getRound(i).get(j).getGameUI().getUi(), new Label(" "));
+						}
+						else 
+							rounds[i].getChildren().addAll(new Label("    "),new Label("    "),new Label("    "),
+									new Label("    "),new Label("    "),new Label("    "),new Label("    "),
+									new Label("    "),new Label("    "),new Label("    "),new Label("    "),
+									new Label("    "),new Label("    "), new Label("    "),new Label("    "),
+									new Label("    "), bracket.getRound(i).get(j).getGameUI().getUi(), new Label(" "));
+					}	
+					else if(i == 3) {
+						rounds[i].getChildren().addAll(new Label("    "),new Label("    "),new Label("    "),
+								new Label("    "),new Label("    "),new Label("    "),new Label("    "),
+								new Label("    "),new Label("    "),new Label("    "),new Label("    "),
+								new Label("    "),new Label("    "), new Label("    "),new Label("    "),
+								new Label("    "),new Label("    "),new Label("    "), 
+								bracket.getRound(i).get(j).getGameUI().getUi(), new Label(" "));
+					}
+					else 
+						rounds[i].getChildren().addAll(bracket.getRound(i).get(j).getGameUI().getUi(), new Label(" "));
+						
 				}
 			}
 
@@ -242,12 +278,11 @@ public class MainNew extends Application {
 					 //In the case the last round (Finals)
 					 if(i == rounds.length-1) {
 						 b1.setOnAction(event -> {
-								// TODO Auto-generated method stub
 								if((t1.getText().equals("")||t2.getText().equals(""))) 
 									return;
 									
 								lbl_firstPlace.setText("First Place:" +bracket.getRound(currentRound).get(currentGame).playGame(t1.getText(), t2.getText()).getName());
-								lbl_secondPlace.setText("First Place:" +bracket.getRound(currentRound).get(currentGame).getLoser().getName());
+								lbl_secondPlace.setText("Second Place:" +bracket.getRound(currentRound).get(currentGame).getLoser().getName());
 								
 							
 							b1.setDisable(true);
@@ -261,7 +296,6 @@ public class MainNew extends Application {
 
 					 Button btn_NextRound = bracket.getRound(i+1).get(nextRoundGame).getGameUI().getBtn_submit();
 					 b1.setOnAction(event -> {
-							// TODO Auto-generated method stub
 							if((t1.getText().equals("")||t2.getText().equals(""))) 
 								return;
 								
@@ -311,7 +345,7 @@ public class MainNew extends Application {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		TeamReader read = new TeamReader("src/16Teams.txt"); // (args[0]);
+		TeamReader read = new TeamReader("src/2Teams.txt"); // (args[0]);
         teamsList = read.getTeams();
          bracket = new Bracket(teamsList);
         
