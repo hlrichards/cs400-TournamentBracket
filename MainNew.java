@@ -14,6 +14,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 
+
+
 package application;
 
 import java.io.File;
@@ -57,6 +59,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 /**
  * This class reads in the team names from the file, sets up the GUI, and handles the user interaction
@@ -104,7 +107,7 @@ public class Main extends Application {
 						if(j == 0) 
 							rounds[i].getChildren().addAll(new Label("    "),new Label("    "),new Label("    "), 
 									bracket.getRound(i).get(j).getGameUI().getUi(), new Label(" "));
-						else if(j == 1 || j == 2)
+						else if(j == 1)
 							rounds[i].getChildren().addAll(new Label("    "),new Label("    "),new Label("    "),
 									new Label("    "),new Label("    "), bracket.getRound(i).get(j).getGameUI().getUi(),
 									new Label(" "));
@@ -158,7 +161,6 @@ public class Main extends Application {
 			// adds the rounds to the GUI as necessary, depending on the number
 			// of teams in the tournament
 			GridPane gPane = new GridPane();
-
 			
 			for(int i =0; i<rounds.length;i++) {
 					gPane.add(rounds[i], i, 0);
@@ -302,14 +304,12 @@ public class Main extends Application {
 						Team winner = bracket.getRound(currentRound).get(currentGame).playGame(t1.getText(), t2.getText());
 						if(currentGame%2==0) {
 							bracket.getRound(currentRound+1).get(nextRoundGame).setTeam1(winner);
-							System.out.println(currentRound+" "+currentGame + bracket.getRound(currentRound).get(currentGame).getWinner().getName());
 							if(bracket.getRound(currentRound+1).get(nextRoundGame).getTeam2().getName()!="TBD")
 								btn_NextRound.setDisable(false);
 						}
 						
 						else {
 							bracket.getRound(currentRound+1).get(nextRoundGame).setTeam2(winner);
-							System.out.println(currentRound+" "+currentGame + bracket.getRound(currentRound).get(currentGame).getWinner().getName());
 							if(bracket.getRound(currentRound+1).get(nextRoundGame).getTeam1().getName()!="TBD")
 								btn_NextRound.setDisable(false);
 						}
@@ -345,9 +345,9 @@ public class Main extends Application {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		TeamReader read = new TeamReader("src/2Teams.txt"); // (args[0]);
+		TeamReader read = new TeamReader("src/16Teams.txt"); // (args[0]);
         teamsList = read.getTeams();
-         bracket = new Bracket(teamsList);
+        bracket = new Bracket(teamsList);
         
 		launch(args);
 	}
