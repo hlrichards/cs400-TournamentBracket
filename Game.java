@@ -105,7 +105,7 @@ public class Game {
             loser = team2;          
         } else {
             winner = team2;
-            loser = team2;
+            loser = team1;
         }
         return winner;
 	}
