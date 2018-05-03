@@ -300,6 +300,15 @@ public class Main extends Application {
 					 b1.setOnAction(event -> {
 							if((t1.getText().equals("")||t2.getText().equals(""))) 
 								return;
+						 	if(t1.getText().equals(t2.getText())) {
+								Alert alert = new Alert(AlertType.ERROR);
+								alert.setTitle("Score Error");
+								alert.setHeaderText("You entered an invalid score");
+								alert.setContentText("Please enter a score that is not a tie");
+
+								alert.showAndWait();
+								return;
+							}
 								
 						Team winner = bracket.getRound(currentRound).get(currentGame).playGame(t1.getText(), t2.getText());
 						if(currentGame%2==0) {
