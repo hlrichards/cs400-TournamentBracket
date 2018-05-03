@@ -95,14 +95,11 @@ public class Main extends Application {
             // This section initializes each game to be played in each round, starting with the
             // round of 16, then quarter finals, then semi finals, then finals. This code correctly
             // seeds teams read in from the file (supports sizes 16, 8, 4, 2, 1, and 0) 
-            
-
-            
-        
             VBox rounds[] = new VBox[bracket.getNumberOfRounds()];
             for(int i =0; i<rounds.length;i++) {
                 rounds[i] = new VBox();
                 for(int j=0; j<bracket.getRound(i).size();j++) {
+                    
                     // adding the extra labels in this section allows the display to look aesthetically pleasing
                     // and like a typical tournament bracket for any number of teams
                     if(i == 1) {
@@ -141,12 +138,10 @@ public class Main extends Application {
                                 bracket.getRound(i).get(j).getGameUI().getUi(), new Label(" "));
                     }
                     else 
-                        rounds[i].getChildren().addAll(bracket.getRound(i).get(j).getGameUI().getUi(), new Label(" "));
-                        
+                        rounds[i].getChildren().addAll(bracket.getRound(i).get(j).getGameUI().getUi(), new Label(" "));      
                 }
             }
 
-            
             
             // adds the team names to an ArrayList so that they may be 
             // put into an ObservableList and displayed in order on the GUI
@@ -252,7 +247,7 @@ public class Main extends Application {
                          b1.setDisable(true);
                      }
                      
-                     //Only allow valid input in text box
+                     // Only allow valid input in text box
                      t1.textProperty().addListener(new ChangeListener<String>() {
                             @Override
                             public void changed(ObservableValue<? extends String> observable, String oldValue, 
@@ -282,8 +277,10 @@ public class Main extends Application {
                      //In the case the last round (Finals)
                      if(i == rounds.length-1) {
                          b1.setOnAction(event -> {
+                                // will not allow a submission if there is a missing score
                                 if((t1.getText().equals("")||t2.getText().equals(""))) 
                                     return;
+                                // displays an alert box if there is a tie
                                 if(t1.getText().equals(t2.getText())) {
                                     Alert alert = new Alert(AlertType.ERROR);
                                     alert.setTitle("Score Error");
@@ -316,8 +313,10 @@ public class Main extends Application {
 
                      Button btn_NextRound = bracket.getRound(i+1).get(nextRoundGame).getGameUI().getBtn_submit();
                      b1.setOnAction(event -> {
+                            // will not allow a submission if there is a missing score
                             if((t1.getText().equals("")||t2.getText().equals(""))) 
                                 return;
+                            // displays an alert box if there is a tie
                             if(t1.getText().equals(t2.getText())) {
                                 Alert alert = new Alert(AlertType.ERROR);
                                 alert.setTitle("Score Error");
@@ -343,14 +342,7 @@ public class Main extends Application {
                         
                         
                         
-                        b1.setDisable(true);
-                        
-                        //bracket.nextRound();
-                        
-
-                            
-                        
-                            
+                        b1.setDisable(true);     
                         });
                 }
             }
@@ -378,7 +370,4 @@ public class Main extends Application {
         
         launch(args);
     }
-    
-
-
 }
