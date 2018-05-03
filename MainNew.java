@@ -284,6 +284,15 @@ public class Main extends Application {
 						 b1.setOnAction(event -> {
 								if((t1.getText().equals("")||t2.getText().equals(""))) 
 									return;
+							 	if(t1.getText().equals(t2.getText())) {
+									Alert alert = new Alert(AlertType.ERROR);
+									alert.setTitle("Score Error");
+									alert.setHeaderText("You entered an invalid score");
+									alert.setContentText("Please enter a score that is not a tie");
+
+									alert.showAndWait();
+									return;
+								}
 									
 								lbl_firstPlace.setText("First Place:" +bracket.getRound(currentRound).get(currentGame).playGame(t1.getText(), t2.getText()).getName());
 								lbl_secondPlace.setText("Second Place:" +bracket.getRound(currentRound).get(currentGame).getLoser().getName());
